@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { onMounted } from 'vue'
 
 export default {
   name: "App",
@@ -12,16 +11,12 @@ export default {
   components: {},
 
   setup() {
-    const store = useStore()
-    const darkMode = computed(() => store.getters["DarkMode"])
 
     onMounted(() => {      
-      var x = window.localStorage.getItem('darkMode');
-      store.dispatch("UpdateDarkMode", x)
+      //
     });
 
     return {
-      darkMode,
     };
   },
 };
