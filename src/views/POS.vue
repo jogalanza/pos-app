@@ -291,14 +291,14 @@
 
 <style lang="scss">
 .pos-main {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 140px);
 
   .section-1 {
     height: 100%;
   }
 
   .cart-list {
-    height: calc(100% - 270px);
+    height: calc(100% - 232px);
   }
 
   .q-td {
