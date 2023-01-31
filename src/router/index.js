@@ -36,37 +36,6 @@ const store = useStore()
         component: () => import('../components/MyProfile.vue'),
       },
       { 
-        path: '/main/reports',
-        name: 'Reports',
-        meta: { roles: [1] },
-        component: () => import('../views/Reports.vue'),
-      },
-      { 
-        path: '/main/masterfiles/employees',
-        name: 'Employee',
-        meta: { roles: [1] },
-        component: () => import('../components/Masterfiles/Employees.vue'),
-      },
-      //Inventory
-      { 
-        path: '/main/inventory/stocks',
-        name: 'Products',
-        meta: { roles: [1] },
-        component: () => import('../components/Inventory/ProductsBoard.vue'),
-      },
-      { 
-        path: '/main/inventory/category',
-        name: 'ItemCategory',
-        meta: { roles: [1] },
-        component: () => import('../components/Inventory/ItemCategory.vue'),
-      },
-      { 
-        path: '/main/inventory/location',
-        name: 'InventoryLocation',
-        meta: { roles: [1] },
-        component: () => import('../components/Inventory/InventoryLocation.vue'),
-      },
-      { 
         path: '/main/preferences',
         name: 'Preferences',
         meta: { roles: [1] },

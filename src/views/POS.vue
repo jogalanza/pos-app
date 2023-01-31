@@ -116,14 +116,6 @@
                     :key="i"
                     class="col-6 col-sm-4 q-pa-sm"
                   >
-                    <!-- <q-card class="product-item" @click="SelectItem(p)">
-                      <q-card-section class="q-pb-none">{{
-                        p.name
-                      }}</q-card-section>
-                      <q-card-section>{{
-                        formatCurrency(p.price, 2)
-                      }}</q-card-section>
-                    </q-card> -->
 
                     <q-item
                       class="q-card product-item q-pa-none"
@@ -207,11 +199,6 @@
                     />
                   </template>
                 </q-input>
-                <!-- <div v-if="props.row.key === activeItem.key" class="row">
-                  <q-btn class="col" icon="o_remove" round flat dense/>
-                  <div class="col">{{ props.value }}</div>
-                  <q-btn class="col" icon="o_add" round flat dense/>
-                </div> -->
                 <div v-else style="padding: 7px 16px">
                   {{ props.value }}
                 </div>
@@ -446,11 +433,6 @@ export default {
     const dlgQty = ref(false);
 
     const activeRowIndex = ref(1);
-
-    // const getQty = () => {
-    //   var x = !entryValue.value ? 1 : entryValue.value.split("@")[0];
-    //   return x;
-    // };
 
     const RemoveItem = (index) => {
       items.value.splice(index, 1);

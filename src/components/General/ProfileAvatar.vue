@@ -46,7 +46,7 @@
 
 <script>
 import { ref } from "vue";
-import userApi from "../../api/user";
+//import userApi from "../../api/user";
 
 export default {
   name: "ProfileAvatar",
@@ -90,11 +90,11 @@ export default {
       let formData = new FormData();
       formData.append("file", filelist.value[0]);
 
-      userApi.UploadProfilePhoto(formData, props.empid).then((response) => {
-        if (response.data.result.success) {
-          context.emit("refresh");
-        }
-      });
+      // userApi.UploadProfilePhoto(formData, props.empid).then((response) => {
+      //   if (response.data.result.success) {
+      //     context.emit("refresh");
+      //   }
+      // });
     };
 
     const emitClick = () => {
