@@ -1,0 +1,7 @@
+{
+    "name": "Payroll App",
+    "short_name": "Payroll App",
+    "description": "test",
+    "start_url": "/clientapp/dist",
+    "display": "standalone"
+  }

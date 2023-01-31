@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <!-- <title><%= htmlWebpackPlugin.options.title %></title> -->
+  <title>POS - Mosaic</title>
+  <link href="https://fonts.googleapis.com/css?family=Archivo&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link
+      href="<%= BASE_URL %>fonts/daxpro/index.css"
+      rel="stylesheet"
+    />
+  <script src="<%= BASE_URL %>config/index.js"></script>
+
+  <!-- easePay font -->
+  <link href="https://fonts.googleapis.com/css2?family=Faster+One&family=Libre+Barcode+39+Extended+Text&display=swap" rel="stylesheet">
+
+  <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Accounting">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="XMAP">
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+  <style>
+    .app-name{
+      font-family: "Faster One";
+    }
+    html {
+      font-family: DaxPro, Montserrat, Archivo !important;
+      overflow: hidden !important;
+    }
+
+    body {
+      font-family: "DaxPro", "Roboto", "-apple-system", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+      overflow: hidden;
+    }
+    /* "Montserrat", "Archivo",   */
+
+    ::-webkit-scrollbar {
+      width: 3px;
+      /* Remove scrollbar space ebe3e3 */
+      background: transparent;
+      /* Optional: just make scrollbar invisible */
+      margin-top: 50px;
+      height: 11px;
+    }
+
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      /* background: #5b9bd5;
+        background: #ccc; 
+        background: #847f7f; */
+      background: rgba(4, 65, 134, 0.5);
+      height: 3px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-input-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+
+    ::-moz-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+
+    :-ms-input-placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+
+    ::placeholder {
+      color: peachpuff;
+      font-size: 13px;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+    textarea {
+      resize: none !important;
+    }
+
+    .bg-green-etc {
+      background: #64a70b !important;
+    }
+
+    .center-piece {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: Archivo;
+      letter-spacing: .4rem;
+      font-size: 2rem;
+      color: white;
+      height: 100px;
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    sup {
+      font-size: 11px;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>

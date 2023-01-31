@@ -1,0 +1,99 @@
+.q-btn, 
+.q-item, 
+.q-field,
+.q-checkbox__label{
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: initial;
+}
+.q-checkbox__inner{
+    font-size: 32px;
+}
+.q-field--dense .q-field__label{
+    font-size: 13px;
+}
+
+.thick-control{
+    .q-field__native{
+        font-size: 3em;
+        font-weight: bolder;
+        line-height: 1em !important;
+    }   
+}
+
+
+.select-content{
+    font-size: 12px;
+}
+
+.q-drawer{
+    .q-item{
+        .q-focus-helper {
+            border-radius: 32px;
+        }
+    }
+    .q-item--active{
+        color: white;
+        border-radius: 32px;
+        background-color: $bg-active-row;
+    }
+    
+}
+
+.fine-print-1{
+    font-size: 0.85em;
+}
+.text-h7{
+    font-size: 0.85em;
+    line-height: 1.8;
+}
+.q-checkbox{
+    height: 48px;
+}
+
+.clickable-text{
+    font-size:1em;
+    font-weight:bold;
+    letter-spacing:initial;
+    margin-left:-4px
+}
+
+.q-dialog__backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.grid-mode-avatar{
+    display: block; 
+    background: #4caf50;
+    margin-top:8px;
+    margin-bottom: auto;
+}
+
+.q-checkbox__bg{
+    &.absolute{
+        border-radius: 50%;
+    }
+}
+
+.bg-dark-grey {
+    background: #353a35 !important;
+}
+
+.err-msg{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 8px;
+    padding-right: 8px;
+
+    div{
+        background: #e02828;
+        padding: 4px;
+        border-radius: 4px;
+        color: white;
+    }
+}
+
+.info-msg {
+    color: blue;
+    font-size: 0.9em;
+}

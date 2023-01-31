@@ -1,0 +1,14 @@
+{
+  "appId": "gov.binan.payroll",
+  "appName": "Payroll App",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "hostname": "119.13.83.43",
+    "androidScheme": "https",
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
