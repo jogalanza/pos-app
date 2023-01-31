@@ -616,7 +616,7 @@ export default {
         items: [...items.value],
         checkout: true
       });
-
+      dlgCheckout.value = false;
       NotifyUser({success: true, message: "Transaction saved"});
 
       Reset();
