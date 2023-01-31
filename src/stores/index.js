@@ -142,28 +142,6 @@ export const useMainStore = defineStore("main", {
   },
 
   actions: {
-
-    SetActiveDashboard(payload) {
-      return new Promise((resolve) => {
-        this.activeDashboard = { ...payload };
-        resolve();
-      });
-    },
-    SyncDashboardFilter(payload) {
-      return new Promise((resolve) => {
-        this.dashboardFilter = { ...payload };
-        resolve();
-      });
-    },
-    AddActiveBoard(payload){
-      return new Promise((resolve) => {
-        this.activeBoards.push({ ...payload });
-        resolve();
-      });
-    },
-    SyncSnapshot(payload){
-      this.snapshot = {...payload};
-    },
     SyncAppSessionInfo(payload){
       this.appSessionInfo = {...payload};
     },

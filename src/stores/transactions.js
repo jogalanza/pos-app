@@ -7,7 +7,9 @@ export const useTransaction = defineStore("transaction", {
   }),
 
   getters: {
-   
+   Saved(state){
+    return state.saved;
+   }
   },
 
   actions: {

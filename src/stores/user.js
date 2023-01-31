@@ -238,7 +238,7 @@ export const useUser = defineStore("user", {
           },
         ],
       },
-      { label: "Point Of Sales", icon: "o_point_of_sale", route: { name: "POS" } },
+      { label: "Point Of Sale", icon: "o_point_of_sale", route: { name: "POS" } },
       { label: "Dashboard", icon: "o_dashboard", route: { name: "Dashboard" } },
       // {
       //   label: "Sales",
@@ -537,8 +537,8 @@ export const useUser = defineStore("user", {
     ],
     genMenu: [
       // { label: "separator", icon: "", route: {name: 'Dashboard'} },
-      { label: "Preferences", icon: "o_style", route: { name: "Preferences" } },
-      { label: "About", icon: "o_info", route: { name: "Preferences" } },
+      // { label: "Preferences", icon: "o_style", route: { name: "Preferences" } },
+      { label: "About", icon: "o_info", route: { name: "About" } },
     ],
   }),
 

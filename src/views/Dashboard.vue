@@ -6,37 +6,37 @@
           <div class="col-12 col-sm-3">
             <div class="dashboard-card">
               <q-avatar size="42px">
+                <q-icon name="o_shopping_basket" color="green" size="42px" />
+              </q-avatar>
+              <div class="val">{{ transaction.Saved.length }}</div>
+              <q-item-label caption>Transactions</q-item-label>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div class="dashboard-card">
+              <q-avatar size="42px">
+                <q-icon name="o_qr_code" color="red" size="42px" />
+              </q-avatar>
+              <div class="val">{{ product.Products.length }}</div>
+              <q-item-label caption>Products</q-item-label>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div class="dashboard-card">
+              <q-avatar size="42px">
                 <q-icon name="o_email" color="green" size="42px" />
               </q-avatar>
-              <div class="val">87</div>
+              <div class="val">0</div>
               <q-item-label caption>Messages</q-item-label>
             </div>
           </div>
           <div class="col-12 col-sm-3">
             <div class="dashboard-card">
               <q-avatar size="42px">
-                <q-icon name="o_account_circle" color="red" size="42px" />
+                <q-icon name="o_pending_actions" color="green" size="42px" />
               </q-avatar>
-              <div class="val">87</div>
-              <q-item-label caption>Access Request</q-item-label>
-            </div>
-          </div>
-          <div class="col-12 col-sm-3">
-            <div class="dashboard-card">
-              <q-avatar size="42px">
-                <q-icon name="o_settings" color="green" size="42px" />
-              </q-avatar>
-              <div class="val">87</div>
-              <q-item-label caption>Messages</q-item-label>
-            </div>
-          </div>
-          <div class="col-12 col-sm-3">
-            <div class="dashboard-card">
-              <q-avatar size="42px">
-                <q-icon name="o_settings" color="green" size="42px" />
-              </q-avatar>
-              <div class="val">87</div>
-              <q-item-label caption>Messages</q-item-label>
+              <div class="val">0</div>
+              <q-item-label caption>Pending</q-item-label>
             </div>
           </div>
         </q-card>
@@ -48,7 +48,9 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import { useStore } from "vuex";
+import { useTransaction } from "@/stores/transactions";
+import { useProduct } from "@/stores/product"
+import { useMainStore } from "../stores";
 
 export default {
   name: "Dashboard",
@@ -56,15 +58,16 @@ export default {
   //   EditEmployee: defineAsyncComponent(() => import("./EditEmployee.vue")),
   // },
   setup() {
-    const store = useStore();
-
+    const store = useMainStore();
+    const transaction = useTransaction();
+    const product = useProduct();
     const editor = ref(null);
 
     onMounted(() => {
       console.log(editor);
     });
 
-    console.log("setup", store);
+
     const items = ref([
       { RowNum: 1, Customer: "Jared" },
       { RowNum: 2, Customer: "Omni" },
@@ -117,26 +120,20 @@ export default {
       console.log(event);
     };
 
+    onMounted(() => {
+      store.UpdateBoardTitle("Dashboard");
+    });
+
     return {
       items,
+      product,
       columns,
       dataOptions,
       activeRowIndex,
-      store,
+      transaction,
       editor,
       togglePeriod,
     };
-  },
-  methods: {
-    ShowEditor() {
-      if (this.editor != null) {
-        this.editor.EditItem();
-      }
-    },
-  },
-  mounted() {
-    console.log("mounted", this.store);
-    this.store.dispatch('UpdateBoardTitle', "Dashboard")
   },
 };
 </script>

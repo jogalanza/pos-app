@@ -73,6 +73,14 @@ const store = useStore()
         component: () => import('../components/Common/Preferences.vue'),
       },
       {
+        path: '/about',
+        name: 'About',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import('../views/About.vue')
+      },
+      {
         path: '/unauthorized',
         name: 'Unauthorized',
         // route level code-splitting

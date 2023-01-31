@@ -17,7 +17,7 @@
           class="app-title"
           style="text-transform: uppercase; padding-left: 16px"
         >
-          {{ boardTitle }}
+          {{ store.BoardTitle }}
         </q-toolbar-title>
 
         <q-space />
@@ -221,7 +221,7 @@ export default {
       else return { Name: "Loading user ..." };
     });
     const appName = computed(() => store.getAppName);
-    const boardTitle = computed(() => store.boardTitle);
+    const boardTitle = computed(() => store.BoardTitle);
     const menu = computed(() => user.getMenu);
     const scrWidth = computed(() => q.screen.width);
 

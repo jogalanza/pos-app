@@ -142,7 +142,7 @@ export default {
     const rememberMe = ref(0);
 
     const appName = computed(() => store.getters["getAppName"]);
-    const CompanyName = ref("City of Binan - Payroll System");
+    const CompanyName = ref("POS");
     const entryMode = ref(1);
     const creds = ref({
       email: null,
@@ -155,7 +155,7 @@ export default {
 
     const InvokeLogin = () => {
 
-      navigateTo({ name: "Dashboard" });
+      navigateTo({ name: "POS" });
 
       // msg.value = "";
       // loading.value = true;

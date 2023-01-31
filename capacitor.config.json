@@ -1,6 +1,6 @@
 {
-  "appId": "gov.binan.payroll",
-  "appName": "Payroll App",
+  "appId": "app.jogalanza.payroll",
+  "appName": "App",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "android": {

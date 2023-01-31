@@ -1,8 +1,8 @@
 <template>
   <BoardLayout>
     <template v-slot:header>
-      <q-toolbar class="q-py-sm">
-        <q-btn
+      <q-toolbar class="q-py-sm" style="padding-left: 32px">
+        <!-- <q-btn
           icon="o_find_in_page"
           text-color="black"
           stack
@@ -10,7 +10,7 @@
           dense
           class="q-mr-sm"
           padding="xs sm"
-        />
+        /> -->
         <q-btn
           icon="o_switch_access_shortcut_add"
           :text-color="calcOptions.mergeDuplicate ? 'white' : 'black'"
@@ -21,7 +21,9 @@
           class="q-mr-sm"
           padding="xs sm"
           @click="calcOptions.mergeDuplicate = !calcOptions.mergeDuplicate"
-        />
+        >
+          <q-tooltip>Merge quantities of the same product</q-tooltip>
+      </q-btn>
         <q-space />
         <q-btn icon="o_settings" text-color="black" round flat />
       </q-toolbar>
@@ -48,6 +50,40 @@
           <q-btn
             label="OK"
             @click="ConfirmSelection"
+            style="width: 100%"
+            color="green"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="dlgCheckout">
+      <q-card>
+        <q-toolbar>
+          <q-toolbar-title><span class="q-mr-lg">Checkout: </span><span class="text-bold text-primary">{{ totals.net }}</span></q-toolbar-title>
+          <q-space />
+          <q-btn icon="o_close" round flat @click="dlgCheckout = false" />
+        </q-toolbar>
+        <q-card-section>
+          <q-input
+            v-model="payment"
+            filled
+            hint="Enter the amount of payment received"
+            type="number"
+            autofocus
+            prefix="Php"
+            input-style="font-size: 1.4em;padding-left: 8px"
+            @keydown.enter="ProceeedCheckout"
+          ></q-input>
+        </q-card-section>
+        <q-card-section class="text-h5">
+          <span class="q-mr-md">Change:</span>
+          <span>{{ formatCurrency(CalcChange) }}</span>
+        </q-card-section>
+        <q-card-actions class="row">
+          <q-btn
+            label="OK"
+            @click="ProceeedCheckout"
             style="width: 100%"
             color="green"
           />
@@ -206,7 +242,9 @@
                     flat
                     dense
                     @click.stop="RemoveItem(props.rowIndex)"
-                  />
+                  >
+                  <q-tooltip>Remove</q-tooltip>
+                  </q-btn>
                 </div>
               </q-td>
             </template>
@@ -250,10 +288,11 @@
               <q-btn
                 class="col-3"
                 icon="o_shopping_cart"
-                label="Charge"
+                label="Checkout"
                 color="primary"
                 stack
                 padding="md"
+                @click="Checkout"
               />
             </q-card-actions>
           </q-card>
@@ -295,8 +334,8 @@
 </style>
 
 <script>
-import { ref, watch, defineAsyncComponent, onMounted, nextTick } from "vue";
-import { useStore } from "vuex";
+import { ref, watch, defineAsyncComponent, onMounted, nextTick, computed } from "vue";
+import { useMainStore } from "@/stores/index";
 import general from "../mixins/general";
 import { useProduct } from "@/stores/product";
 import { useTransaction } from "@/stores/transactions"
@@ -309,7 +348,7 @@ export default {
     ),
   },
   setup() {
-    const store = useStore();
+    const store = useMainStore();
     const transaction = useTransaction();
     const product = useProduct();
     const { getObjLabel, formatNumber, NotifyUser, formatCurrency, ConfirmAction } = general();
@@ -327,11 +366,13 @@ export default {
       gross: `0.00`,
       tax: `0.00`,
       net: `0.00`,
+      rawNet: 0,
     });
     const selectedItem = ref({});
     const activeItem = ref({});
     const qty = ref(1);
-
+    const dlgCheckout = ref(false);
+    const payment = ref(0);
     const items = ref([]);
     const selection = ref([]);
     const entryValue = ref(null);
@@ -439,6 +480,7 @@ export default {
       totals.value.gross = formatCurrency(x.toFixed(2));
       totals.value.tax = formatCurrency(t.toFixed(2));
       totals.value.net = formatCurrency((x + t).toFixed(2));
+      totals.value.rawNet = x + t;
     };
 
     const SelectItem = (data) => {
@@ -531,19 +573,57 @@ export default {
     const SaveTransaction = () => {
       transaction.Save({
         id: new Date().getTime(),
-        items: [...items.value]
+        items: [...items.value],
+        checkout: false
       });
 
-      transaction.$persist();
+      NotifyUser({success: true, message: "Transaction saved"});
 
       Reset();
+
+      nextTick(() => {
+          if (codeScanner.value) codeScanner.value.focus();
+        });
     }
+
+    const Checkout = () => {
+      if (items.value.length === 0){
+        NotifyUser({success: false, message: "Shopping basket is empty"});
+        return;
+      }
+
+      dlgCheckout.value = true;
+    }
+
+    const CalcChange = computed(() => {
+      return payment.value - totals.value.rawNet;
+    });
 
     const Reset = () => {
       //reset
       items.value = [];
         activeItem.value = {};
         selectedItem.value = {};
+
+        nextTick(() => {
+          if (codeScanner.value) codeScanner.value.focus();
+        });
+    }
+
+    const ProceeedCheckout = () => {
+      transaction.Save({
+        id: new Date().getTime(),
+        items: [...items.value],
+        checkout: true
+      });
+
+      NotifyUser({success: true, message: "Transaction saved"});
+
+      Reset();
+
+      nextTick(() => {
+          if (codeScanner.value) codeScanner.value.focus();
+        });
     }
 
     const test = (data) => {
@@ -551,7 +631,7 @@ export default {
     };
 
     onMounted(() => {
-      theme.value = store.state.darkMode;
+      store.UpdateBoardTitle("Point Of Sale")
     });
 
     return {
@@ -585,7 +665,12 @@ export default {
       RemoveItem,
       DiscardTransaction,
       SaveTransaction,
-      transaction
+      transaction,
+      dlgCheckout,
+      Checkout,
+      payment,
+      CalcChange,
+      ProceeedCheckout
     };
   },
 };
