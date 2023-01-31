@@ -91,7 +91,7 @@
 
                     <q-item
                       class="q-card product-item q-pa-none"
-                      @click="SelectItem(p)"
+                      @click.stop="SelectItem(p)"
                       clickable
                       style="height: 100px"
                     >
@@ -100,7 +100,7 @@
                         <q-item-label>{{ formatCurrency(p.price, 2) }}</q-item-label>
                       </q-item-section>
                       <q-item-section side style="width: 40%">
-                        <q-img :src="p.imgUrl" width="100%" height="100%">
+                        <q-img class="item-image" :src="p.imgUrl" width="100%" height="100%">
                           <template v-slot:error>
                             <q-img :src="require('@/assets/na.jpg')" width="100%" />
                             
@@ -136,7 +136,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-qty="props">
-              <q-td :props="props">
+              <q-td :props="props" style="padding: 0px">
                 <q-input
                   v-if="props.row.key === activeItem.key"
                   v-model="items[props.rowIndex].qty"
@@ -176,7 +176,7 @@
                   <div class="col">{{ props.value }}</div>
                   <q-btn class="col" icon="o_add" round flat dense/>
                 </div> -->
-                <div v-else>
+                <div v-else style="padding: 7px 16px">
                   {{ props.value }}
                 </div>
               </q-td>
@@ -196,7 +196,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
-              <q-td :props="props">
+              <q-td :props="props" style="padding: 0px">
                 <div v-if="props.row.key === activeItem.key">
                   <q-btn
                     class="col"
@@ -280,6 +280,12 @@
       border-left: 4px solid red;
     }
   }
+
+  .item-image{
+    .q-img{
+      height: 100%;
+    }
+  }
 }
 .item-list-table-header {
   th {
@@ -289,7 +295,7 @@
 </style>
 
 <script>
-import { ref, watch, defineAsyncComponent, onMounted } from "vue";
+import { ref, watch, defineAsyncComponent, onMounted, nextTick } from "vue";
 import { useStore } from "vuex";
 import general from "../mixins/general";
 import { useProduct } from "@/stores/product";
@@ -334,8 +340,8 @@ export default {
         name: "index",
         label: "",
         field: "key",
-        style: "width: 5%; max-width: 5%",
-        headerStyle: "width: 5%; max-width: 5%",
+        style: "width: 4px; max-width: 4px;padding: 0px",
+        headerStyle: "width: 4px; max-width: 4px;padding: 0px",
       },
       {
         name: "name",
@@ -436,7 +442,7 @@ export default {
     };
 
     const SelectItem = (data) => {
-      console.warn(data);
+      console.warn("SelectItem", data);
       qty.value = 1;
       selectedItem.value = { ...data };
       dlgQty.value = true;
@@ -467,10 +473,14 @@ export default {
       }
 
       qty.value = 1;
-      dlgQty.value = false;
+      
       activeItem.value = {};
       setTimeout(() => {
-        if (codeScanner.value) codeScanner.value.focus();
+        dlgQty.value = false;
+        nextTick(() => {
+          if (codeScanner.value) codeScanner.value.focus();
+        });
+        
       }, 200);
     };
 
